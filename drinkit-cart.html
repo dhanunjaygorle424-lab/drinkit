@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | DrinkIt</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #1d4ed8 0%, #0f172a 100%);
+            color: #f8fafc;
+            font-family: Inter, Arial, sans-serif;
+            padding: 24px;
+        }
+        .page-shell {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            gap: 18px;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+        }
+        .brand .mark {
+            display: inline-grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: #fb7185;
+            color: #0f172a;
+            font-size: 1.2rem;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        nav a {
+            color: #f8fafc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.6fr);
+            gap: 24px;
+        }
+        .panel {
+            background: rgba(15, 23, 42, 0.94);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 26px;
+            padding: 28px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 2rem;
+        }
+        .cart-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            align-items: center;
+            padding: 18px 16px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 18px;
+            margin-bottom: 14px;
+        }
+        .cart-item strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+        .item-meta {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+        .item-actions {
+            display: grid;
+            gap: 8px;
+            justify-items: end;
+        }
+        .qty-btn, .remove-btn, .checkout-btn, .clear-btn {
+            border: none;
+            border-radius: 14px;
+            padding: 10px 14px;
+            cursor: pointer;
+        }
+        .qty-btn {
+            background: rgba(255,255,255,0.08);
+            color: #f8fafc;
+            width: 44px;
+        }
+        .remove-btn {
+            background: #ef4444;
+            color: #fff;
+        }
+        .checkout-btn {
+            width: 100%;
+            margin-top: 18px;
+            background: linear-gradient(135deg, #fbbf24, #fb7185);
+            color: #071022;
+            font-weight: 700;
+        }
+        .clear-btn {
+            width: 100%;
+            margin-top: 12px;
+            background: rgba(255,255,255,0.08);
+            color: #f8fafc;
+        }
+        .summary {
+            display: grid;
+            gap: 12px;
+        }
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            color: #cbd5e1;
+        }
+        .summary-line.total {
+            color: #f8fafc;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 10px;
+            margin-top: 8px;
+        }
+        .empty-cart {
+            padding: 24px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 18px;
+            text-align: center;
+            color: #94a3b8;
+        }
+        @media (max-width: 860px) {
+            .content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="top-bar">
+            <div class="brand">
+                <span class="mark">D</span>
+                <span>DrinkIt</span>
+            </div>
+            <nav id="main-nav"></nav>
+        </div>
+        <div class="content">
+            <section class="panel">
+                <h1>Your Cart</h1>
+                <div id="cart-items"></div>
+                <button type="button" class="clear-btn" id="clear-cart">Clear Cart</button>
+            </section>
+            <aside class="panel">
+                <h2>Order summary</h2>
+                <div id="cart-summary"></div>
+                <button type="button" class="checkout-btn" id="checkout-btn">Continue to Payment</button>
+            </aside>
+        </div>
+    </div>
+    <script src="storage.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

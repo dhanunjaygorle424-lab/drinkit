@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Portal | DrinkIt</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #f8fafc;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        .wrap { max-width: 1100px; margin: 0 auto; }
+        .topbar { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:24px; }
+        .card { background: rgba(15,23,42,0.95); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:24px; box-shadow:0 20px 60px rgba(0,0,0,0.25); }
+        table { width:100%; border-collapse:collapse; margin-top:16px; }
+        th, td { padding:12px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.08); vertical-align:top; }
+        th { color:#fbbf24; }
+        .pill { display:inline-block; padding:6px 10px; border-radius:999px; background:#fbbf24; color:#0f172a; font-size:0.86rem; font-weight:700; }
+        a { color:#f8fafc; text-decoration:none; }
+        .muted { color:#94a3b8; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="topbar">
+            <h1>Admin Portal</h1>
+            <a href="index.html">← Back to shop</a>
+        </div>
+        <div class="card">
+            <h2>Registered users</h2>
+            <div id="users-list" class="muted">Loading...</div>
+        </div>
+        <div class="card" style="margin-top:20px;">
+            <h2>Transactions</h2>
+            <div id="transactions-list" class="muted">Loading...</div>
+        </div>
+    </div>
+    <script src="storage.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const storage = window.DrinkItStorage;
+        function renderUsers() {
+            const users = storage.getUsers();
+            const container = document.getElementById('users-list');
+            if (!users.length) {
+                container.innerHTML = '<p>No users registered yet.</p>';
+                return;
+            }
+            container.innerHTML = `
+                <table>
+                    <thead>
+                        <tr><th>Name</th><th>Email</th><th>Password</th></tr>
+                    </thead>
+                    <tbody>
+                        ${users.map(user => `<tr><td>${user.name || '-'}</td><td>${user.email}</td><td>${user.password}</td></tr>`).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderTransactions() {
+            const txns = storage.getTransactions();
+            const container = document.getElementById('transactions-list');
+            if (!txns.length) {
+                container.innerHTML = '<p>No transactions yet.</p>';
+                return;
+            }
+            container.innerHTML = `
+                <table>
+                    <thead>
+                        <tr><th>ID</th><th>Customer</th><th>Email</th><th>Amount</th><th>Location</th><th>Items</th><th>Date</th></tr>
+                    </thead>
+                    <tbody>
+                        ${txns.map(txn => `
+                            <tr>
+                                <td>#${txn.id}</td>
+                                <td>${txn.customerName}</td>
+                                <td>${txn.email}</td>
+                                <td>${txn.amount}</td>
+                                <td>${txn.location ? txn.location : '-'}</td>
+                                <td>${txn.items.map(item => `${item.qty}× ${item.name}`).join(', ')}</td>
+                                <td>${txn.date}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        renderUsers();
+        renderTransactions();
+    </script>
+</body>
+</html>

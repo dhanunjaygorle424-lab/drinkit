@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | DrinkIt</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #1a2238 0%, #071022 100%);
+            color: #f8fafc;
+            font-family: Inter, Arial, sans-serif;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+        .card {
+            width: min(520px, 100%);
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 26px;
+            padding: 32px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 2rem;
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin: 18px 0 8px;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.04);
+            color: #f8fafc;
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            margin-top: 24px;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #fbbf24, #fb7185);
+            color: #071022;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .footer {
+            margin-top: 18px;
+            color: #94a3b8;
+            text-align: center;
+        }
+        .footer a {
+            color: #f8fafc;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Create your DrinkIt account</h1>
+        <form id="registerForm">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Choose a secure password" required>
+
+            <label for="confirm-password">Confirm password</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter your password" required>
+
+            <button type="submit">Register</button>
+        </form>
+        <div class="footer">
+            Already have an account? <a href="drinkit-login.html">Login</a>
+        </div>
+    </div>
+    <script src="storage.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

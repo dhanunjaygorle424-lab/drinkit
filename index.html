@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrinkIt | Fast Beer Delivery</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0f172a;
+            --surface: #15233c;
+            --surface-strong: #1f2f4a;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #ffb703;
+            --accent-strong: #f59e0b;
+            --border: rgba(255,255,255,0.08);
+            --shadow: 0 24px 80px rgba(0,0,0,0.25);
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Inter, Arial, sans-serif;
+            background: linear-gradient(135deg, #0b1220 0%, #4338ca 45%, #0f172a 100%);
+            color: var(--text);
+        }
+        .page-shell {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px 40px;
+        }
+        header.site-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 18px 22px;
+            background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(59,130,246,0.12));
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            margin-bottom: 28px;
+        }
+        .brand {
+            color: linear-gradient(135deg, #fbbf24, #fb7185);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .brand .mark {
+            color: linear-gradient(135deg, #fbbf24, #fb7185);
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: 900;
+        }
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin-right: 18px;
+            font-weight: 600;
+        }
+        nav a:last-child { margin-right: 0; }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 24px;
+            align-items: center;
+        }
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .category-buttons button {
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+            padding: 10px 18px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .category-buttons button.active,
+        .category-buttons button:hover {
+            background: linear-gradient(135deg, #fbbf24, #fb7185);
+            color: #0f172a;
+            border-color: transparent;
+        }
+        .search-row {
+            flex: 1;
+            min-width: 240px;
+        }
+        .search-row input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+            font-size: 1rem;
+        }
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 28px;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .hero-copy h1 {
+            margin: 0 0 16px;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 0.95;
+        }
+        .hero-copy p {
+            margin: 0 0 24px;
+            max-width: 620px;
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        .hero-copy .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .btn-primary, .btn-secondary {
+            border: none;
+            border-radius: 14px;
+            padding: 14px 22px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #fbbf24, #fb7185);
+            color: #0f172a;
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.08);
+            color: var(--text);
+        }
+        .hero-panel {
+            padding: 28px;
+            border-radius: 26px;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        .hero-panel h2 {
+            margin: 0 0 16px;
+            font-size: 1.4rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .stat-card {
+            background: #111827;
+            padding: 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .stat-card strong {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+        }
+        .product-card {
+            background: linear-gradient(180deg, rgba(15,23,42,0.9), rgba(15,23,42,0.98));
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+        .product-card .details {
+            padding: 18px;
+            flex: 1;
+            display: grid;
+            gap: 12px;
+        }
+        .product-card h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .product-card p {
+            margin: 0;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .price {
+            color: #fbbf24;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .card-actions button {
+            border: none;
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .card-actions .order-btn {
+            background: #22c55e;
+            color: #071b13;
+        }
+        .card-actions .cart-btn {
+            background: rgba(255,255,255,0.08);
+            color: var(--text);
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        @media (max-width: 900px) {
+            header.site-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .hero-panel {
+                order: -1;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .price-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .card-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+        search input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.04);
+            color: var(--text);
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <div class="brand">
+                <span class="mark">D</span>
+                <div>
+                    <div>DrinkIt</div>
+                    <small style="color: var(--text-muted);">Fast drinks delivery — beer and whisky.</small>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="category-buttons">
+                    <button type="button" data-category-button="all" class="active">All</button>
+                    <button type="button" data-category-button="beer">Beers</button>
+                    <button type="button" data-category-button="wine">Wines</button>
+                    <button type="button" data-category-button="whisky">Whisky</button>
+                </div>
+                <div class="search-row">
+                    <input id="productSearch" type="search" placeholder="Search beers & whisky...">
+                </div>
+            </div>
+
+            <nav id="main-nav">
+                <a href="index.html">Home</a>
+                <a href="drinkit-cart.html">Cart</a>
+                <a href="drinkit-login.html">Login</a>
+                <a href="drinkitR.html">Register</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-copy">   
+                <h1>Order Beer in Minutes.</h1>
+                <p>DrinkIt brings the best craft and premium beers right to your door with fast checkout and secure payment. Choose your drink, add it to cart, and pay instantly.</p>
+                <div class="hero-actions">
+                    <a href="#catalog" class="btn-primary">Shop Beers</a>
+                    <a href="drinkit-cart.html" class="btn-secondary">View Cart</a>
+                    <a href="drinkitBeer.html" class="btn-secondary">Beers</a>
+          
+                </div>
+            </div>
+            <div class="hero-panel">
+                <h2>Express features</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <strong>4</strong>
+                        <span>Premium Beers</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>5</strong>
+                        <span>Fine Whiskies</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>10 min</strong>
+                        <span>Express delivery</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>24/7</strong>
+                        <span>Support & updates</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalog">
+            <h2 style="margin-bottom: 18px;">Top Selling: 4 Beers • 5 Whiskies</h2>
+            <div class="product-grid">
+                <article class="product-card" data-name="Brocode" data-price="80" data-category="beer">
+                    <img src="https://static.livcheers.com/static/content/images/liquor/LCIN02642.webp" alt="Brocode beer bottle">
+                    <div class="details">
+                        <h3>Brocode</h3>
+                        <p>Rich malt flavor with a smooth finish. Perfect for weekend celebrations.</p>
+                        <div class="price-row">
+                            <span class="price">₹80</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="order-btn">Order Now</button>
+                            <button class="cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-name="Legendary Lager" data-price="300" data-category="beer">
+                    <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/da/cms-assets/cms/product/f07b2433-06dc-4ac8-bb2c-d1d53f1547df.png" alt="Legendary Lager">
+                    <div class="details">
+                        <h3>Legendary Lager</h3>
+                        <p>Crisp and refreshing lager with a clean, balanced profile.</p>
+                        <div class="price-row">
+                            <span class="price">₹300</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="order-btn">Order Now</button>
+                            <button class="cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-name="Tuborg Strong" data-price="230" data-category="beer">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ4K8gD8G7vq10dE2fqFeuYyJbsI1FW-LCDJ-xiTMMOg&s" alt="Tuborg Strong beer">
+                    <div class="details">
+                        <h3>Tuborg Strong</h3>
+                        <p>Rich amber lager with caramel malt and a velvety smooth finish.</p>
+                        <div class="price-row">
+                            <span class="price">₹230</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="order-btn">Order Now</button>
+                            <button class="cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-name="Bira Gold" data-price="280" data-category="beer">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCtFTaG9uMyKr2fDN1Qf0VHaSgLcbyqF-jejZpLy-YmQ&s=10" alt="Bira Gold beer">
+                    <div class="details">
+                        <h3>Bira Gold</h3>
+                        <p>Golden strong beer with a bold finish and roasted malt notes.</p>
+                        <div class="price-row">
+                            <span class="price">₹280</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="order-btn">Order Now</button>
+                            <button class="cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-name="William Lawson" data-price="120" data-category="whisky">
+                    <img src="https://hedonne.in/wp-content/uploads/2024/01/WILLIAM-LAWSONS-BLENDED-SCOTCH-WHISKY-1.webp" alt="William Lawson whisky">
+                    <div class="details">
+                        <h3>William Lawson</h3>
+                        <p>Blended Scotch whisky with a smooth, easy-drinking profile.</p>
+                        <div class="price-row">
+                            <span class="price">₹120</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="order-btn">Order Now</button>
+                            <button class="cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-name="Ballantine" data-price="150" data-category="whisky">
+                    <img src="https://delhidutyfree.co.in/media/catalog/product/cache/aa0670c897e2785b5cecbbb82e420995/2/0/2002880.webp" alt="Ballantine whisky">
+                    <div class="details">
+                        <h3>Ballantine</h3>
+                        <p>Smooth blended whisky with a touch of honey and toasted oak.</p>
+                        <div class="price-row">
+                            <span class="price">₹150</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="order-btn">Order Now</button>
+                            <button class="cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-name="Mansion House" data-price="220" data-category="whisky">
+                    <img src="https://tilind.com/wp-content/uploads/2022/02/MH-Core-600-x-600px.jpg" alt="Mansion House whisky">
+                    <div class="details">
+                        <h3>Mansion House</h3>
+                        <p>Classic whisky with warm spice and a deep caramel finish.</p>
+                        <div class="price-row">
+                            <span class="price">₹220</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="order-btn">Order Now</button>
+                            <button class="cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-name="Royal Stag" data-price="260" data-category="whisky">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL4K8gD8G7vq10dE2fqFeuYyJbsI1FW-LCDJ-xiTMMOg&s" alt="Royal Stag whisky">
+                    <div class="details">
+                        <h3>Royal Stag</h3>
+                        <p>Robust whisky with smooth vanilla and spice notes.</p>
+                        <div class="price-row">
+                            <span class="price">₹260</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="order-btn">Order Now</button>
+                            <button class="cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card" data-name="royal challengers" data-price="320" data-category="whisky">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO8eyhGR9u2vXJDy34mOGH49u8GgBoDHWmGSsO2pecDg&s=10" alt="royal challengers">
+                    <div class="details">
+                        <h3>Royal challengers</h3>
+                        <p>Classic whisky with warm spice and a deep caramel finish.</p>
+                        <div class="price-row">
+                            <span class="price">320</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="order-btn">Order Now</button>
+                            <button class="cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                </article> 
+            </div>
+        </section>
+
+        <footer>
+            DrinkIt — your fast beer delivery experience with secure payment and cart checkout.
+        </footer>
+    </div>
+    <script src="storage.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
