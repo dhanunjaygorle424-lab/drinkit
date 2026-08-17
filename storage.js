@@ -4,11 +4,31 @@
     const STORAGE_CART = 'drinkit_cart';
     const STORAGE_TRANSACTIONS = 'drinkit_transactions';
 
+    // Provide a safe storage object. Prefer window.localStorage when available.
+    // If localStorage is unavailable (e.g. private mode or blocked), fall back to an in-memory
+    // storage so the app still works for the current session instead of silently failing.
+    function makeMemoryStorage() {
+        const mem = Object.create(null);
+        return {
+            getItem(key) { return Object.prototype.hasOwnProperty.call(mem, key) ? mem[key] : null; },
+            setItem(key, value) { mem[key] = String(value); },
+            removeItem(key) { delete mem[key]; }
+        };
+    }
+
     function safeStorage() {
         try {
+            if (typeof window === 'undefined' || typeof window.localStorage === 'undefined') {
+                return makeMemoryStorage();
+            }
+            // some browsers may throw when accessing localStorage (e.g. when disabled)
+            const testKey = '__drinkit_storage_test__';
+            window.localStorage.setItem(testKey, '1');
+            window.localStorage.removeItem(testKey);
             return window.localStorage;
         } catch (error) {
-            return null;
+            // fallback to in-memory storage (persists only for the session)
+            return makeMemoryStorage();
         }
     }
 
@@ -16,7 +36,9 @@
         const storage = safeStorage();
         if (!storage) return fallback;
         try {
-            return JSON.parse(storage.getItem(key) || 'null') ?? fallback;
+            const raw = storage.getItem(key);
+            if (raw === null || raw === undefined) return fallback;
+            return JSON.parse(raw);
         } catch (error) {
             return fallback;
         }
@@ -25,7 +47,11 @@
     function writeJSON(key, value) {
         const storage = safeStorage();
         if (!storage) return;
-        storage.setItem(key, JSON.stringify(value));
+        try {
+            storage.setItem(key, JSON.stringify(value));
+        } catch (error) {
+            // ignore write errors (e.g. quota exceeded) — keep app usable in-memory
+        }
     }
 
     function getUsers() {
@@ -38,13 +64,14 @@
 
     function getLogged() {
         const storage = safeStorage();
-        return storage ? storage.getItem(STORAGE_USER) : null;
+        const raw = storage ? storage.getItem(STORAGE_USER) : null;
+        return raw ? String(raw) : null;
     }
 
     function setLogged(email) {
         const storage = safeStorage();
         if (!storage) return;
-        storage.setItem(STORAGE_USER, email);
+        storage.setItem(STORAGE_USER, String(email));
     }
 
     function clearLogged() {
