@@ -234,58 +234,50 @@
             'Himalayan Ale','Blue Moon','Stella Artois','Amstel','Brewsky','Pilsner Urquell','Bavaria','Hops & Grains','Castle Lite','Thunderbolt',
             'Austrian Gold','Moonshine Lager','Lager Royale','Golden Shield','Northern Lights','Raven Stout','Pine Ridge','Cedar Brew','Brewmaster','Hoppy Trail',
             'Copper Valley','Amber Horizon','Brookside Ale','Hillcrest Lager','Highland Mist','Valley Pride','Spark Brew','Sunset Dry','Harbor Light','Oak Barrel',
-            'Craft Wave','Silver Crest','Red Ember','Stone Creek','Summer Ale','Winter Frost','Rustic Grain','Dawn Pils','Proud Bavarian','Forest Lager',
-            'Twilight House','Crown Valley','Malt & Moon','Cider Peak','Wild Current','Misty Ridge','Horizon Gold','Bamboo Brew','Draft Range','Night Shift',
-            'Brew District','Moon Valley','Smooth Crest','Ginger Pour','North Ridge','Violet Hops','Drift Pale','Velvet Amber','Atlas Brew','Summit Club',
-            'Copper Dusk','Bayside Light','Marble Ale','Brass Hops','Ridge Runner','Quiet Ember','Aged Barley','Zenith Lager','RiverStone','Fizzy Pine',
-            'Silver Braid','Harvest Gold','Midnight Steps','Hearth Brew','Logan Vale','Jade Pour','Cloud Hopper','Express Ale','Cinder Pale','Whisky River'
+            'Craft Wave','Silver Crest','Red Ember','Stone Creek','Summer Ale','Winter Frost','Rustic Grain','Dawn Pils','Proud Bavarian','Forest Lager'
         ];
 
         const whiskyNames = [
             'William Lawson','Ballantine','Mansion House','Royal Stag','Royal Challengers','Signature','Black Label','Imperial Blue','McDowells','Jim Beam',
-            'Jack Daniels','Chivas Regal','Johnnie Walker','Jameson','Teachers','Passport','Glenlivet','Absolut Creation','Glenfiddich','Highland Park',
+            'Jack Daniels','Chivas Regal','Johnnie Walker','Jameson','Teachers','Passport','Glenlivet','The Glen','Glenfiddich','Highland Park',
             'Old Monk','Royal Gold','Dewars','Hennessy','Bacardi','Smirnoff Reserve','Hankey Bannister','Lalique','Cask 88','Malt Street',
             'Hillton Reserve','Heritage Gold','Famous Grouse','Monkey Shoulder','Pernod','Dalmore','Glen Grant','Buchanan','The Singleton','McDowells No.1',
-            'Black & White','Cutty Sark','Antiquity','The Glen','Red Label','White Horse','Old Admiral','Blenders Pride','Premium Select','Navy Cut',
-            'Bunnahabhain','Luna Reserve','Velvet Crest','Amber Vine','Apex Blend','Silver Oak','North Peak','Maple Reserve','Gold Oak','The Velvet',
-            'Cannon Barrel','Oak Valley','East Coast','Highland Timber','Brown Bottle','The Reserve House','Copper Grade','Brewed Spirit','Noble Pour','Mighty Oak',
-            'Long Barrel','Golden Crest','Wild Ember','River Gate','Mountain Mist','Velvet Wave','Drift Reserve','Cask Master','Royal Reserve','Pine Valley',
-            'Trident Gold','Ashford Malt','Starline Blend','Cedar Reserve','Ridgewood','North Gate','Millstone','Castle Peak','Aged Ember','Calm Ridge',
-            'Sunset Bourbon','The Bungalow','Oak Ember','Classic Reserve','Malt Royale','Hearth Blend','Gold Creek','Silver Ridge','Grand Legacy','The Pride'
+            'Black & White','Cutty Sark','Antiquity','Red Label','White Horse','Old Admiral','Blenders Pride','Premium Select','Navy Cut','Bunnahabhain',
+            'Luna Reserve','Velvet Crest','Amber Vine','Apex Blend','Silver Oak','North Peak','Maple Reserve','Gold Oak','The Velvet','Cannon Barrel',
+            'Oak Valley','East Coast','Highland Timber','Brown Bottle','The Reserve House','Copper Grade','Brewed Spirit','Noble Pour','Mighty Oak','Long Barrel',
+            'Golden Crest','Wild Ember','River Gate','Mountain Mist','Velvet Wave','Drift Reserve','Cask Master','Royal Reserve','Pine Valley','Trident Gold'
         ];
 
         const wineNames = [
             'Sula Cabernet','Jacob’s Creek Shiraz','Cavin Blanc De Blancs','Fratelli Merlot','Charles & Charles','Sula Zinfandel','Grover La Reserve',
             'Arka Reserve','Beringer Founders','Moscato d’Asti','Chateau Sula','Domaine de la Terre','Pine Valley Rosé','Renaissance Red','Valle de Vida',
-            'Noble Vines','Sauvignon Rose','Cedar Valley','Merlot Classic','Pinot Noir Select','Bordeaux Reserve','White Harvest','Amber Ridge','Yuma Red',
+            'Noble Vines','Sauvignon Rosé','Cedar Valley','Merlot Classic','Pinot Noir Select','Bordeaux Reserve','White Harvest','Amber Ridge','Yuma Red',
             'Grand Canyon Red','Sunset Cellar','Luna Rosé','Monsoon Vine','Vinora Classic','Vintage Pearl','Crown Valley White','Redwood Reserve','Mildura Gold',
             'Bottle House Red','Ridgepoint Blanc','Grape Bloom','Hillside Harvest','Ruby Vine','Silver Hill','Ruby Reserve','Coastal White','Flora Merlot','Banff Red',
             'The Vineyard Reserve','Velvet Vine','Eclipse Red','Golden Bottling','Pine Estate','Harvest Gold','Starlight Rosé','Amber Fruit','Valley Crest','Castleview Red',
             'Rosewood Reserve','Lotus White','Cape Valley','Wine Country Select','Petal Red','Sunrise Blend','Crown Gold','Janus Red','Moonlit White','Violet Cellar',
-            'Lakeside Reserve','Maltier Red','Grape Ember','Dawn Harvest','Noble Cellars','Midnight Cabernet','Hillside Reserve','Canyon White','Olive Branch','Fresh Vineyard',
-            'Horizon Rosé','Velvet Reserve','Dramatic Red','Warm Valley','Wicker Blend','Pleasant Hills','Caspian Red','Fern Valley','Willow Creek','Golden Grove',
-            'Briar Reserve','Chateau Mist','Twilight Reserve','White Orchid','Deep Valley','Brass Harvest','La Rose Gold','Vineyard Pride','Forest Bloom','Midtown Red'
+            'Lakeside Reserve','Maltier Red','Grape Ember','Dawn Harvest','Noble Cellars','Midnight Cabernet','Hillside Reserve','Canyon White','Olive Branch','Fresh Vineyard'
         ];
 
         const products = [
-            ...beerNames.map((name, index) => ({
-                name: `${name} ${index + 1}`,
-                price: 120 + index * 18,
+            ...beerNames.map((name) => ({
+                name,
                 category: 'beer',
+                price: 120 + Math.floor(Math.random() * 300),
                 description: 'Fresh and crisp with premium malt depth and smooth finish.',
                 image: 'https://static.livcheers.com/static/content/images/liquor/LCIN02642.webp'
             })),
-            ...whiskyNames.map((name, index) => ({
-                name: `${name} ${index + 1}`,
-                price: 260 + index * 22,
+            ...whiskyNames.map((name) => ({
+                name,
                 category: 'whisky',
+                price: 260 + Math.floor(Math.random() * 420),
                 description: 'Smooth, rich, and balanced with warm oak and mellow spice.',
                 image: 'https://hedonne.in/wp-content/uploads/2024/01/WILLIAM-LAWSONS-BLENDED-SCOTCH-WHISKY-1.webp'
             })),
-            ...wineNames.map((name, index) => ({
-                name: `${name} ${index + 1}`,
-                price: 900 + index * 25,
+            ...wineNames.map((name) => ({
+                name,
                 category: 'wine',
+                price: 900 + Math.floor(Math.random() * 950),
                 description: 'Elegant and layered with grape richness, fruit notes, and a silky finish.',
                 image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=80'
             }))
