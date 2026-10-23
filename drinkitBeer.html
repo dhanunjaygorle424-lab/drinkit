@@ -326,6 +326,17 @@
             'Royal Reserve', 'Pine Valley', 'Trident Gold'
         ];
 
+        const whiskyImages = [
+            'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1601610379572-6d67e3d286b2?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1532634922-8fe0b757fb13?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1575444758702-4a6b922e1e7e?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1513558161293-cdaf765ed2e6?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1559526642-c1f0012f9f4d?auto=format&fit=crop&w=900&q=80'
+        ];
+
         const wineNames = [
             'Sula Cabernet', 'Jacob’s Creek Shiraz', 'Cavin Blanc De Blancs', 'Fratelli Merlot',
             'Charles & Charles', 'Sula Zinfandel', 'Grover La Reserve', 'Arka Reserve', 'Beringer Founders',
@@ -342,6 +353,17 @@
             'Midnight Cabernet', 'Hillside Reserve', 'Canyon White', 'Olive Branch', 'Fresh Vineyard'
         ];
 
+        const wineImages = [
+            'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1559526642-c1f0012f9f4d?auto=format&fit=crop&w=900&q=80',
+            'https://images.unsplash.com/photo-1575444758702-4a6b922e1e7e?auto=format&fit=crop&w=900&q=80'
+        ];
+
         const products = [
             ...beerNames.map((name, index) => ({
                 name,
@@ -355,14 +377,14 @@
                 category: 'whisky',
                 price: 260 + index * 16,
                 description: 'Smooth, rich, and balanced with mellow oak and warm spice.',
-                image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80'
+                image: whiskyImages[index % whiskyImages.length]
             })),
             ...wineNames.map((name, index) => ({
                 name,
                 category: 'wine',
                 price: 900 + index * 25,
                 description: 'Elegant and layered with fruit richness and a silky finish.',
-                image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=900&q=80'
+                image: wineImages[index % wineImages.length]
             }))
         ];
 
