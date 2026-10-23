@@ -237,6 +237,65 @@
             'Craft Wave','Silver Crest','Red Ember','Stone Creek','Summer Ale','Winter Frost','Rustic Grain','Dawn Pils','Proud Bavarian','Forest Lager'
         ];
 
+        const beerDescriptions = [
+            'Crisp malt body with a clean, golden finish and soft hop aroma.',
+            'Smooth lager with bright hops and a refreshing, balanced finish.',
+            'Classic golden ale with citrus sparkle and soft biscuit notes.',
+            'Rounded malt sweetness with a smooth, mellow finish.',
+            'Rich amber lager with caramel depth and a velvety finish.',
+            'Bold roasted malt flavor with a warm, lively finish.',
+            'Light body and floral aroma with a crisp, easy finish.',
+            'Premium pilsner with a clean bite and subtle grain finish.',
+            'Balanced bitterness with a crisp, fresh finish from pale malt.',
+            'Clean sweetness and subtle hops for a smooth finish.',
+            'Citrus-forward lager with a bright and refreshing finish.',
+            'Classic American lager with a light, crisp finish.',
+            'Easy-drinking beer with mild sweetness and a crisp finish.',
+            'Smooth Japanese lager with clean malt notes and a soft finish.',
+            'Delicate balance of sweetness and hops with a silky finish.',
+            'Light-bodied brew with a crisp aroma and polished finish.',
+            'Traditional craft taste with a gentle malt finish.',
+            'Balanced bitter profile and a clean, dry finish.',
+            'Well-rounded lager with a soft aroma and crisp finish.',
+            'Bright golden flavor with a mellow malt finish.',
+            'Mountain-inspired brew with floral hops and a clean finish.',
+            'Belgian wheat character with orange peel brightness and soft finish.',
+            'Smooth and creamy texture with a light spice finish.',
+            'Fresh floral aroma and a crisp, clean finish.',
+            'Balanced bitterness with a light citrus finish.',
+            'Crisp barley flavor and subtle fruit notes on the finish.',
+            'Golden lager with a crisp bite and polished finish.',
+            'Dry, refreshing profile with a gentle hop finish.',
+            'Fresh, clean malt sweetness and a bright finish.',
+            'Light and easy-drinking with a smooth, gentle finish.',
+            'Silky lager with toasted grain and a soft finish.',
+            'Rich amber body with toasted caramel and a smooth finish.',
+            'Brewed for depth, ending with a silky malt finish.',
+            'Golden and crisp with a polished hop finish.',
+            'Balanced ale with subtle citrus and a warming finish.',
+            'Dark roasted notes with a smooth, elegant finish.',
+            'Deep malt character and a roasted, lingering finish.',
+            'Elegant barley flavor with a clean, mellow finish.',
+            'Fruity hop aroma with a crisp, earthy finish.',
+            'Toasted grain and floral notes with a clean finish.',
+            'Rich golden beer with a soft spice finish.',
+            'Bright and fruity with a crisp, clean finish.',
+            'Smooth lager profile with light caramel finish.',
+            'Layered malt taste with a fresh, crisp finish.',
+            'Silky texture and gentle hops with a clean finish.',
+            'Balanced body with a vibrant, crisp finish.',
+            'Crisp and refreshing with a soft grain finish.',
+            'Smooth golden body and delicate malt finish.',
+            'Fresh citrus aroma with a mellow, crisp finish.',
+            'Roasted malt richness and a smooth noble finish.',
+            'Clean and refreshing finish with a soft hop glow.',
+            'Bold amber notes and a smooth, stable finish.',
+            'Lightly sweet and lively with a crisp finish.',
+            'Crafted for a bright body and clean finish.',
+            'Freshly brewed with subtle fruit hints and a crisp finish.',
+            'Balanced hop bitterness with a soft, smooth finish.'
+        ];
+
         const whiskyNames = [
             'William Lawson','Ballantine','Mansion House','Royal Stag','Royal Challengers','Signature','Black Label','Imperial Blue','McDowells','Jim Beam',
             'Jack Daniels','Chivas Regal','Johnnie Walker','Jameson','Teachers','Passport','Glenlivet','The Glen','Glenfiddich','Highland Park',
@@ -260,25 +319,25 @@
         ];
 
         const products = [
-            ...beerNames.map((name) => ({
+            ...beerNames.map((name, index) => ({
                 name,
                 category: 'beer',
-                price: 120 + Math.floor(Math.random() * 300),
-                description: 'Fresh and crisp with premium malt depth and smooth finish.',
+                price: 120 + (index * 11),
+                description: beerDescriptions[index],
                 image: 'https://static.livcheers.com/static/content/images/liquor/LCIN02642.webp'
             })),
-            ...whiskyNames.map((name) => ({
+            ...whiskyNames.map((name, index) => ({
                 name,
                 category: 'whisky',
-                price: 260 + Math.floor(Math.random() * 420),
-                description: 'Smooth, rich, and balanced with warm oak and mellow spice.',
+                price: 260 + (index * 16),
+                description: 'Smooth, rich, and balanced with mellow oak and warm spice.',
                 image: 'https://hedonne.in/wp-content/uploads/2024/01/WILLIAM-LAWSONS-BLENDED-SCOTCH-WHISKY-1.webp'
             })),
-            ...wineNames.map((name) => ({
+            ...wineNames.map((name, index) => ({
                 name,
                 category: 'wine',
-                price: 900 + Math.floor(Math.random() * 950),
-                description: 'Elegant and layered with grape richness, fruit notes, and a silky finish.',
+                price: 900 + (index * 25),
+                description: 'Elegant and layered with fruit richness and a silky finish.',
                 image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=80'
             }))
         ];
